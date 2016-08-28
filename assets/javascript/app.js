@@ -75,6 +75,7 @@ function runAPI(name){
 	 	$("#imageContainer").empty();
 
 	 	var imgArraylength;
+	 	var multiplesFive=1;
 
 	 	//Check to see if object array length is no greater than 10 (per HW requirement)
 	 	if(response.data.length>=10){
@@ -85,26 +86,79 @@ function runAPI(name){
 	 	}
 
 	    for(var i=0;i<imgArraylength;++i){
-	    	createImgContainer(response.data[i]);
+	    	//createImgContainer(response.data[i]);
+	    	if((i+1)%2===0){
+	    		multiplesFive+=1;
+	    	}
 	 	}
+	 	console.log(multiplesFive);
+	 	createImgContainers(response.data,multiplesFive,imgArraylength);
 	}); 
 
 }
 
-function createImgContainer(gifObject){
-	var imgContainer = $("<div>");
-	var imgText = $("<p>");
-	var img = $("<img>");
+function createImgContainers(gifObject,multiplesFive,imgArraylength){
+	
+	var rowDivArray= new Array();
+	for(var i=0;i<multiplesFive;++i){
+		var tempRow = $("<div>");
+		tempRow.attr("class","row");
+		rowDivArray.push(tempRow);
+	}
 
-	imgText.html(gifObject.rating);
-	img.attr("src", gifObject.images.fixed_width_still.url);
-	img.attr("data-static", gifObject.images.fixed_width_still.url);
-	img.attr("data-animate", gifObject.images.fixed_width.url);
-	img.attr("state", "static");
-	img.attr("class", "imageClick");
+	console.log(rowDivArray.length);
 
-	imgContainer.append(imgText,img);
-	$("#imageContainer").append(imgContainer);
+	var rowCounter=0;
+
+	for(var i=0;i<imgArraylength;++i){
+		
+		if(i%2===0&& i!=0){
+			rowCounter+=1;
+		}
+
+		var imgContainer = $("<div>");
+		var imgText = $("<p>");
+		var img = $("<img>");
+
+		imgContainer.attr("class","col-md-6");
+		imgText.html("Rating:" +gifObject[i].rating.toUpperCase());
+		img.attr("src", gifObject[i].images.fixed_height_still.url);
+		img.attr("alt", "anImage");
+		img.attr("data-static", gifObject[i].images.fixed_height_still.url);
+		img.attr("data-animate", gifObject[i].images.fixed_height.url);
+		img.attr("state", "static");
+		img.attr("class", "imageClick");
+
+		imgContainer.append(imgText,img);
+
+
+		console.log("item"+i+"  "+rowCounter);
+		rowDivArray[rowCounter].append(imgContainer);
+
+		
+
+		
+
+	}
+	for(var i=0;i<rowDivArray.length;++i){
+		$("#imageContainer").append(rowDivArray[i]);
+	}
+
+
+
+	// var imgContainer = $("<div>");
+	// var imgText = $("<p>");
+	// var img = $("<img>");
+
+	// imgText.html(gifObject.rating);
+	// img.attr("src", gifObject.images.fixed_width_still.url);
+	// img.attr("data-static", gifObject.images.fixed_width_still.url);
+	// img.attr("data-animate", gifObject.images.fixed_width.url);
+	// img.attr("state", "static");
+	// img.attr("class", "imageClick");
+
+	// imgContainer.append(imgText,img);
+	// $("#imageContainer").append(imgContainer);
 
 
 }
