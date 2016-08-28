@@ -1,19 +1,14 @@
 /*
  *STATIC VARIABLES
  */
- var DEFAULT_LIST=["South Park","Bob\'s Burgers", "Archer","Futurama", "American Dad","Family Guy", "Venture Brothers", "Rick and Morty", "The Simpsons", "Bojack Horseman", 
+ var TOPICS=["South Park","Bob\'s Burgers", "Archer","Futurama", "American Dad","Family Guy", "Venture Brothers", "Rick and Morty", "The Simpsons", "Bojack Horseman", 
  "Daria", "Robot Chicken"];
 
 
 
 
 $(document).ready(function(){
-
-	for(var i=0;i<DEFAULT_LIST.length;++i){
-
-		createButton(DEFAULT_LIST[i]);
-	}
-
+	displayButtons();
 });
 
 
@@ -24,7 +19,8 @@ $(document).on("click", ".buttonSearch", function(){
 });
 
 $("#addButton").on("click", function(){
-	createButton($("#addCategoryBox").val());
+	TOPICS.push($("#addCategoryBox").val());
+	displayButtons();
 
 });
 
@@ -55,6 +51,13 @@ function createButton(name){
 	singleButton.attr("class","buttonSearch");
 	singleButton.html(name);
 	$("#buttonContainer").append(singleButton);
+}
+
+function displayButtons(){
+	$("#buttonContainer").empty();
+	for(var i=0;i<TOPICS.length;++i){
+			createButton(TOPICS[i]);
+	}
 }
 
 
