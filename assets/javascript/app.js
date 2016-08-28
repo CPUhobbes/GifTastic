@@ -4,17 +4,22 @@
  var TOPICS=["South Park","Bob\'s Burgers", "Archer","Futurama", "American Dad","Family Guy", "Venture Brothers", "Rick and Morty", "The Simpsons", "Bojack Horseman", 
  "Daria", "Robot Chicken"];
 
+ var GIPHY_API_KEY = "dc6zaTOxFJmzC";
+
 
 
 
 $(document).ready(function(){
 	displayButtons();
+	
 });
 
 
 $(document).on("click", ".buttonSearch", function(){
 
-	runAPI($(this).data("name"));
+	var tvshow = $(this).data("name");
+	runAPI(tvshow);
+	tvBackground(tvshow);
 
 });
 
@@ -63,7 +68,7 @@ function displayButtons(){
 
 function runAPI(name){
 
-	var queryURL = "http://api.giphy.com/v1/gifs/search?q="+name+"&api_key=dc6zaTOxFJmzC";
+	var queryURL = "http://api.giphy.com/v1/gifs/search?q="+name+"&api_key="+GIPHY_API_KEY;
 
 	$.ajax({url: queryURL, method: 'GET'})
 	 .done(function(response) {
@@ -102,4 +107,16 @@ function createImgContainer(gifObject){
 	$("#imageContainer").append(imgContainer);
 
 
+}
+
+function tvBackground(tvshow){
+
+var queryURL = "http://api.tvmaze.com/singlesearch/shows?q="+tvshow;
+
+	$.ajax({url: queryURL, method: 'GET'
+
+})
+	 .done(function(response) {
+	 	$("body").css({"background-image": "url("+response.image.original+")"});
+	});
 }

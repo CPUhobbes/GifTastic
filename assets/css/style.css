@@ -1,7 +1,12 @@
-/*body{
-	background-image: url('../images/friendsBGScaled.jpg');
+body{
+	background-image: url('../images/bg_default.png');
 	background-position: top;
-	color: #ffffff;
+	color: #000000;
 	background-color: #000000;
 
-}*/
+}
+
+.cellBG{
+
+	background-color: rgba(0,0,0,.8);
+}
