@@ -10,3 +10,24 @@ body{
 
 	background-color: rgba(0,0,0,.8);
 }
+
+#addCategoryBox{
+	margin: 30px 5px;
+
+}
+.buttonSearch{
+	margin: 5px;
+
+
+}
+.imgText{
+	margin-top: 30px;
+	margin-left: 5px;
+	color:#ffffff; 
+
+}
+.imageClick{
+	margin-left: 5px;
+
+
+}
