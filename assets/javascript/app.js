@@ -58,8 +58,10 @@ $(document).on("click", ".imageClick", function(){
 
 //Add TV show to array and display buttons
 function addButton(){
+
 	TOPICS.push($("#addCategoryBox").val());
 	displayButtons();
+	$("#addCategoryBox").val("");
 
 }
 
